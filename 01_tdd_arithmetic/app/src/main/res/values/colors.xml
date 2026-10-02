@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="screen_background">#FFFFFF</color>
+    <color name="screen_background">#F7F8FA</color>
+    <color name="display_text">#17181A</color>
+    <color name="display_secondary">#6D7278</color>
+    <color name="number_button">#FFFFFF</color>
+    <color name="function_button">#DDE1E6</color>
+    <color name="operator_button">#FF9500</color>
+    <color name="number_button_text">#17181A</color>
+    <color name="function_button_text">#30343A</color>
+    <color name="operator_button_text">#FFFFFF</color>
 </resources>
 
