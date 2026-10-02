@@ -1,165 +1,49 @@
 package com.haddol7.lab05calculator;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-    private static final int MAX_INPUT_LENGTH = 15;
-
     private final CalculatorEngine calculator = new CalculatorEngine();
 
-    private TextView displayText;
-    private TextView expressionText;
-    private String currentInput = "0";
-    private String pendingOperator;
-    private double storedValue;
-    private boolean startNewInput = true;
+    private EditText leftInput;
+    private EditText rightInput;
+    private Spinner operatorSpinner;
+    private TextView resultText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        displayText = findViewById(R.id.display_text);
-        expressionText = findViewById(R.id.expression_text);
+        leftInput = findViewById(R.id.left_input);
+        rightInput = findViewById(R.id.right_input);
+        operatorSpinner = findViewById(R.id.operator_spinner);
+        resultText = findViewById(R.id.result_text);
+        Button calculateButton = findViewById(R.id.calculate_button);
 
-        bindDigitButton(R.id.button_0, "0");
-        bindDigitButton(R.id.button_1, "1");
-        bindDigitButton(R.id.button_2, "2");
-        bindDigitButton(R.id.button_3, "3");
-        bindDigitButton(R.id.button_4, "4");
-        bindDigitButton(R.id.button_5, "5");
-        bindDigitButton(R.id.button_6, "6");
-        bindDigitButton(R.id.button_7, "7");
-        bindDigitButton(R.id.button_8, "8");
-        bindDigitButton(R.id.button_9, "9");
-
-        bindOperatorButton(R.id.button_add, "+");
-        bindOperatorButton(R.id.button_subtract, "-");
-        bindOperatorButton(R.id.button_multiply, "×");
-        bindOperatorButton(R.id.button_divide, "÷");
-
-        findViewById(R.id.button_decimal).setOnClickListener(view -> enterDecimal());
-        findViewById(R.id.button_equals).setOnClickListener(view -> calculateResult());
-        findViewById(R.id.button_clear).setOnClickListener(view -> clearCalculator());
-        findViewById(R.id.button_backspace).setOnClickListener(view -> backspace());
-        findViewById(R.id.button_sign).setOnClickListener(view -> toggleSign());
+        calculateButton.setOnClickListener(view -> calculate());
     }
 
-    private void bindDigitButton(int buttonId, String digit) {
-        findViewById(buttonId).setOnClickListener(view -> enterDigit(digit));
-    }
-
-    private void bindOperatorButton(int buttonId, String operator) {
-        findViewById(buttonId).setOnClickListener(view -> selectOperator(operator));
-    }
-
-    private void enterDigit(String digit) {
-        if (startNewInput || "0".equals(currentInput)) {
-            currentInput = digit;
-            startNewInput = false;
-        } else if (currentInput.length() < MAX_INPUT_LENGTH) {
-            currentInput += digit;
-        }
-        updateDisplay();
-    }
-
-    private void enterDecimal() {
-        if (startNewInput) {
-            currentInput = "0.";
-            startNewInput = false;
-        } else if (!currentInput.contains(".") && currentInput.length() < MAX_INPUT_LENGTH) {
-            currentInput += ".";
-        }
-        updateDisplay();
-    }
-
-    private void selectOperator(String operator) {
-        if (pendingOperator != null && !startNewInput) {
-            storedValue = performCalculation(storedValue, pendingOperator, parseCurrentInput());
-            currentInput = formatNumber(storedValue);
-            updateDisplay();
-        } else {
-            storedValue = parseCurrentInput();
-        }
-
-        pendingOperator = operator;
-        expressionText.setText(getString(
-                R.string.pending_expression_format,
-                formatNumber(storedValue),
-                operator
-        ));
-        startNewInput = true;
-    }
-
-    private void calculateResult() {
-        if (pendingOperator == null) {
-            return;
-        }
-
-        double rightValue = parseCurrentInput();
-        double result = performCalculation(storedValue, pendingOperator, rightValue);
-        expressionText.setText(getString(
-                R.string.completed_expression_format,
-                formatNumber(storedValue),
-                pendingOperator,
-                formatNumber(rightValue)
-        ));
-        currentInput = formatNumber(result);
-        pendingOperator = null;
-        startNewInput = true;
-        updateDisplay();
-    }
-
-    private double performCalculation(double left, String operator, double right) {
+    private void calculate() {
+        hideKeyboard();
         try {
-            return calculator.calculate(left, operator, right);
+            double left = Double.parseDouble(leftInput.getText().toString().trim());
+            double right = Double.parseDouble(rightInput.getText().toString().trim());
+            String operator = operatorSpinner.getSelectedItem().toString();
+            double result = calculator.calculate(left, operator, right);
+            resultText.setText(getString(R.string.result_format, formatNumber(result)));
+        } catch (NumberFormatException exception) {
+            resultText.setText(R.string.number_input_error);
         } catch (IllegalArgumentException exception) {
-            clearCalculator();
-            return 0;
+            resultText.setText(R.string.operator_error);
         }
-    }
-
-    private void toggleSign() {
-        if ("0".equals(currentInput)) {
-            return;
-        }
-        currentInput = currentInput.startsWith("-")
-                ? currentInput.substring(1)
-                : "-" + currentInput;
-        startNewInput = false;
-        updateDisplay();
-    }
-
-    private void backspace() {
-        if (startNewInput) {
-            return;
-        }
-        if (currentInput.length() <= 1
-                || (currentInput.startsWith("-") && currentInput.length() == 2)) {
-            currentInput = "0";
-        } else {
-            currentInput = currentInput.substring(0, currentInput.length() - 1);
-        }
-        updateDisplay();
-    }
-
-    private void clearCalculator() {
-        currentInput = "0";
-        pendingOperator = null;
-        storedValue = 0;
-        startNewInput = true;
-        expressionText.setText(R.string.expression_initial);
-        updateDisplay();
-    }
-
-    private double parseCurrentInput() {
-        return Double.parseDouble(currentInput);
-    }
-
-    private void updateDisplay() {
-        displayText.setText(currentInput);
     }
 
     private String formatNumber(double value) {
@@ -167,5 +51,13 @@ public class MainActivity extends Activity {
             return Long.toString((long) value);
         }
         return Double.toString(value);
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager keyboard =
+                (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (keyboard != null && getCurrentFocus() != null) {
+            keyboard.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

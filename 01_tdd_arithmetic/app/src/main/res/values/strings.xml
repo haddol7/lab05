@@ -2,27 +2,20 @@
 <resources>
     <string name="app_name">Basic Calculator</string>
     <string name="title">사칙연산 계산기</string>
-    <string name="display_initial">0</string>
-    <string name="expression_initial">\u0020</string>
-    <string name="pending_expression_format">%1$s %2$s</string>
-    <string name="completed_expression_format">%1$s %2$s %3$s =</string>
-    <string name="button_clear">C</string>
-    <string name="button_backspace">⌫</string>
-    <string name="button_sign">±</string>
-    <string name="button_divide">÷</string>
-    <string name="button_multiply">×</string>
-    <string name="button_subtract">−</string>
-    <string name="button_add">+</string>
-    <string name="button_equals">=</string>
-    <string name="button_decimal">.</string>
-    <string name="button_0">0</string>
-    <string name="button_1">1</string>
-    <string name="button_2">2</string>
-    <string name="button_3">3</string>
-    <string name="button_4">4</string>
-    <string name="button_5">5</string>
-    <string name="button_6">6</string>
-    <string name="button_7">7</string>
-    <string name="button_8">8</string>
-    <string name="button_9">9</string>
+    <string name="instruction">두 숫자와 연산자를 선택한 다음 계산 버튼을 누르세요.</string>
+    <string name="left_number_hint">첫 번째 숫자</string>
+    <string name="right_number_hint">두 번째 숫자</string>
+    <string name="default_left_number">100</string>
+    <string name="default_right_number">10</string>
+    <string name="calculate">계산</string>
+    <string name="result_initial">결과가 여기에 표시됩니다.</string>
+    <string name="result_format">결과: %1$s</string>
+    <string name="number_input_error">입력 오류: 두 숫자를 모두 입력하세요.</string>
+    <string name="operator_error">입력 오류: 연산자를 확인하세요.</string>
+    <string-array name="operators">
+        <item>+</item>
+        <item>-</item>
+        <item>×</item>
+        <item>÷</item>
+    </string-array>
 </resources>
