@@ -2,26 +2,25 @@
 
 ## 프로젝트 구성
 
-- `01_tdd_arithmetic`: Android RPN 사칙연산 앱과 계산 엔진 JUnit 테스트
+- `01_tdd_arithmetic`: Android 사칙연산 앱과 계산 엔진 JUnit 테스트
 - `02_android_image_app`: 이미지 한 장을 화면에 표시하는 Android 앱
 
 ## 01 실행
 
-Android Studio에서 `01_tdd_arithmetic` 폴더를 연다. 계산식은 숫자를 먼저 쓰고 연산자를 마지막에 쓰며, 각 항목을 공백으로 구분한다.
+Android Studio에서 `01_tdd_arithmetic` 폴더를 연다. 첫 번째 숫자와 두 번째 숫자를 입력하고 가운데에서 연산자를 선택한 뒤 `계산` 버튼을 누른다.
 
 ```text
-100 10 +        → 110
-100 10 -        → 90
-100 10 *        → 1000
-100 10 /        → 10
-5 1 2 + 4 * + 3 - → 14
+100 + 10 → 110
+100 - 10 → 90
+100 × 10 → 1000
+100 ÷ 10 → 10
 ```
 
-`RpnCalculatorTest`를 실행하여 계산 엔진 테스트 10개가 통과하는지 확인한다. 테스트 성공 화면과 에뮬레이터에서 실행된 계산기 화면을 캡처하여 저장소에 넣는다.
+`CalculatorEngineTest`를 실행하여 계산 엔진 테스트가 통과하는지 확인한다. 테스트 성공 화면과 에뮬레이터에서 실행된 계산기 화면을 캡처하여 저장소에 넣는다.
 
 ```text
 01_tdd_arithmetic/tdd_test_result.png
-01_tdd_arithmetic/rpn_calculator_result.png
+01_tdd_arithmetic/calculator_result.png
 ```
 
 ## 02 실행

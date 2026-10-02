@@ -26,17 +26,35 @@
             android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
         <EditText
-            android:id="@+id/expression_input"
+            android:id="@+id/left_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:autofillHints=""
-            android:hint="@string/expression_hint"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:maxLines="3"
+            android:hint="@string/left_number_hint"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal|numberSigned"
             android:minHeight="56dp"
-            android:text="@string/default_expression" />
+            android:text="@string/default_left_number" />
+
+        <Spinner
+            android:id="@+id/operator_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:entries="@array/operators"
+            android:spinnerMode="dropdown" />
+
+        <EditText
+            android:id="@+id/right_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/right_number_hint"
+            android:importantForAutofill="no"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal|numberSigned"
+            android:minHeight="56dp"
+            android:text="@string/default_right_number" />
 
         <Button
             android:id="@+id/calculate_button"

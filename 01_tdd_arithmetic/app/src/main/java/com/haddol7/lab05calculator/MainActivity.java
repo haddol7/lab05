@@ -1,17 +1,20 @@
 package com.haddol7.lab05calculator;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
-import android.content.Context;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-    private final RpnCalculator calculator = new RpnCalculator();
+    private final CalculatorEngine calculator = new CalculatorEngine();
 
-    private EditText expressionInput;
+    private EditText leftInput;
+    private EditText rightInput;
+    private Spinner operatorSpinner;
     private TextView resultText;
 
     @Override
@@ -19,20 +22,27 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        expressionInput = findViewById(R.id.expression_input);
+        leftInput = findViewById(R.id.left_input);
+        rightInput = findViewById(R.id.right_input);
+        operatorSpinner = findViewById(R.id.operator_spinner);
         resultText = findViewById(R.id.result_text);
         Button calculateButton = findViewById(R.id.calculate_button);
 
-        calculateButton.setOnClickListener(view -> calculateExpression());
+        calculateButton.setOnClickListener(view -> calculate());
     }
 
-    private void calculateExpression() {
+    private void calculate() {
         hideKeyboard();
         try {
-            double result = calculator.evaluate(expressionInput.getText().toString());
+            double left = Double.parseDouble(leftInput.getText().toString().trim());
+            double right = Double.parseDouble(rightInput.getText().toString().trim());
+            String operator = operatorSpinner.getSelectedItem().toString();
+            double result = calculator.calculate(left, operator, right);
             resultText.setText(getString(R.string.result_format, formatNumber(result)));
+        } catch (NumberFormatException exception) {
+            resultText.setText(R.string.number_input_error);
         } catch (IllegalArgumentException exception) {
-            resultText.setText(getString(R.string.error_format, exception.getMessage()));
+            resultText.setText(R.string.operator_error);
         }
     }
 
