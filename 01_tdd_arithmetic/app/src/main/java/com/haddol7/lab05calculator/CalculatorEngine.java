@@ -1,18 +1,34 @@
 package com.haddol7.lab05calculator;
 
 public class CalculatorEngine {
+    public double add(double left, double right) {
+        return left + right;
+    }
+
+    public double subtract(double left, double right) {
+        return left - right;
+    }
+
+    public double divide(double left, double right) {
+        return right == 0.0 ? 0.0 : left / right;
+    }
+
+    public double multiply(double left, double right) {
+        return left * right;
+    }
+
     public double calculate(double left, String operator, double right) {
         switch (operator) {
             case "+":
-                return left + right;
+                return add(left, right);
             case "-":
-                return left - right;
+                return subtract(left, right);
             case "×":
             case "*":
-                return left * right;
+                return multiply(left, right);
             case "÷":
             case "/":
-                return right == 0.0 ? 0.0 : left / right;
+                return divide(left, right);
             default:
                 throw new IllegalArgumentException("지원하지 않는 연산자입니다.");
         }

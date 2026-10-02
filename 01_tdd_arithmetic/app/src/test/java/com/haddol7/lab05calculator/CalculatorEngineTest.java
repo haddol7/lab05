@@ -16,42 +16,47 @@ public class CalculatorEngineTest {
 
     @Test
     public void addsTwoPositiveNumbers() {
-        assertEquals(110.0, engine.calculate(100, "+", 10), 0.0);
+        assertEquals(110.0, engine.add(100, 10), 0.0);
     }
 
     @Test
     public void addsNegativeNumber() {
-        assertEquals(90.0, engine.calculate(100, "+", -10), 0.0);
+        assertEquals(90.0, engine.add(100, -10), 0.0);
     }
 
     @Test
     public void subtractsPositiveNumber() {
-        assertEquals(90.0, engine.calculate(100, "-", 10), 0.0);
+        assertEquals(90.0, engine.subtract(100, 10), 0.0);
     }
 
     @Test
     public void subtractsNegativeNumber() {
-        assertEquals(110.0, engine.calculate(100, "-", -10), 0.0);
+        assertEquals(110.0, engine.subtract(100, -10), 0.0);
     }
 
     @Test
     public void dividesTwoNumbers() {
-        assertEquals(10.0, engine.calculate(100, "÷", 10), 0.0);
+        assertEquals(10.0, engine.divide(100, 10), 0.0);
     }
 
     @Test
     public void divisionByZeroReturnsZero() {
-        assertEquals(0.0, engine.calculate(100, "÷", 0), 0.0);
+        assertEquals(0.0, engine.divide(100, 0), 0.0);
     }
 
     @Test
     public void multipliesByOne() {
-        assertEquals(100.0, engine.calculate(100, "×", 1), 0.0);
+        assertEquals(100.0, engine.multiply(100, 1), 0.0);
     }
 
     @Test
     public void multipliesTwoNumbers() {
-        assertEquals(1000.0, engine.calculate(100, "×", 10), 0.0);
+        assertEquals(1000.0, engine.multiply(100, 10), 0.0);
+    }
+
+    @Test
+    public void dispatchesOperatorToArithmeticMethod() {
+        assertEquals(110.0, engine.calculate(100, "+", 10), 0.0);
     }
 
     @Test
