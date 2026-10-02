@@ -2,19 +2,27 @@
 
 ## 프로젝트 구성
 
-- `01_tdd_arithmetic`: `unittest`로 먼저 작성한 8개 테스트와 사칙연산 구현
+- `01_tdd_arithmetic`: Android RPN 사칙연산 앱과 계산 엔진 JUnit 테스트
 - `02_android_image_app`: 이미지 한 장을 화면에 표시하는 Android 앱
 
 ## 01 실행
 
-WSL에서 다음 폴더로 이동한 뒤 실행한다.
+Android Studio에서 `01_tdd_arithmetic` 폴더를 연다. 계산식은 숫자를 먼저 쓰고 연산자를 마지막에 쓰며, 각 항목을 공백으로 구분한다.
 
-```bash
-cd /mnt/c/Users/haddo/mobile_web_service/week4/lab05/01_tdd_arithmetic
-python3 -m unittest -v
+```text
+100 10 +        → 110
+100 10 -        → 90
+100 10 *        → 1000
+100 10 /        → 10
+5 1 2 + 4 * + 3 - → 14
 ```
 
-최종 `OK`가 보이는 콘솔을 캡처하여 `01_tdd_arithmetic/tdd_console.png`로 저장한다.
+`RpnCalculatorTest`를 실행하여 계산 엔진 테스트 10개가 통과하는지 확인한다. 테스트 성공 화면과 에뮬레이터에서 실행된 계산기 화면을 캡처하여 저장소에 넣는다.
+
+```text
+01_tdd_arithmetic/tdd_test_result.png
+01_tdd_arithmetic/rpn_calculator_result.png
+```
 
 ## 02 실행
 
