@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -25,6 +26,13 @@ public class MainActivity extends Activity {
         leftInput = findViewById(R.id.left_input);
         rightInput = findViewById(R.id.right_input);
         operatorSpinner = findViewById(R.id.operator_spinner);
+        ArrayAdapter<CharSequence> operatorAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.operators,
+                R.layout.operator_spinner_item
+        );
+        operatorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        operatorSpinner.setAdapter(operatorAdapter);
         resultText = findViewById(R.id.result_text);
         Button calculateButton = findViewById(R.id.calculate_button);
 
