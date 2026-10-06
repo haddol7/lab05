@@ -1,38 +1,27 @@
 # 실습과제 05
 
-## 프로젝트 구성
+- `01_tdd_arithmetic`: Python 사칙연산 클래스와 unittest 테스트 8개
+- `02_android_calculator`: Android 사칙연산 앱과 계산 엔진 JUnit 테스트
 
-- `01_tdd_arithmetic`: Android 사칙연산 앱과 계산 엔진 JUnit 테스트
-- `02_android_image_app`: 이미지 한 장을 화면에 표시하는 Android 앱
+## 01 콘솔 테스트
 
-## 01 실행
+WSL Ubuntu에서 실행한다. Python 표준 라이브러리만 사용하므로 추가 패키지는 필요 없다.
 
-Android Studio에서 `01_tdd_arithmetic` 폴더를 연다. 첫 번째 숫자와 두 번째 숫자를 입력하고 가운데에서 연산자를 선택한 뒤 `계산` 버튼을 누른다.
-
-```text
-100 + 10 → 110
-100 - 10 → 90
-100 × 10 → 1000
-100 ÷ 10 → 10
+```bash
+cd /mnt/c/Users/haddo/mobile_web_service/week4/lab05/01_tdd_arithmetic
+python3 test_FourBasicOpt.py
 ```
 
-`CalculatorEngineTest`를 실행하여 계산 엔진 테스트가 통과하는지 확인한다. 테스트 성공 화면과 에뮬레이터에서 실행된 계산기 화면을 캡처하여 저장소에 넣는다.
+최종 콘솔의 테스트 8개와 `OK`가 보이는 실제 화면을 캡처하여 `01_tdd_arithmetic/tdd_test_result.png`로 저장한다.
 
-```text
-01_tdd_arithmetic/tdd_test_result.png
-01_tdd_arithmetic/calculator_result.png
-```
+## 02 Android 실행
 
-## 02 실행
+Windows Android Studio에서 `02_android_calculator` 폴더를 연다. 가상기기 또는 실제 기기에서 실행하고, 첫 번째 숫자 → 연산자 선택 → 두 번째 숫자 → 계산 버튼 순서로 사용한다.
 
-Android Studio에서 `02_android_image_app` 폴더를 열고 가상 기기 또는 실제 기기에서 앱을 실행한다.
+UI와 `CalculatorEngine`은 분리되어 있으며, `CalculatorEngineTest`로 엔진을 검사할 수 있다.
 
-앱은 아래의 강아지 이미지를 화면에 표시한다.
+실행 화면은 `02_android_calculator/calculator_result.png`에 포함되어 있다.
 
-```text
-02_android_image_app/app/src/main/res/drawable/display_image.png
-```
+## 제출
 
-앱 화면을 캡처하여 `02_android_image_app/android_result.png`로 저장한다.
-
-이미지 출처: [Sasha Sashina - Adult golden retriever (Unsplash)](https://unsplash.com/photos/adult-golden-retriever-E7rt7q2nVc0), [Unsplash License](https://unsplash.com/license)
+두 프로젝트의 전체 소스와 실행 캡처를 신규 GitHub 저장소 하나에 올리고 저장소 URL을 제출한다.
